@@ -1,6 +1,6 @@
 {
     "name": "axios-resource",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Simple Axios resource class",
     "author": "Emile Bergeron <ber.emile@prismalstudio.com>",
     "license": "MIT",
