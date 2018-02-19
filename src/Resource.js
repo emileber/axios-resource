@@ -2,14 +2,18 @@ import template from 'pupa';
 import axios from 'axios';
 import objectAssign from 'object-assign';
 
-/**
- * @property {string} idAttribute
- */
 export default class Resource {
+    /**
+     * @param {object} [options]
+     * @param {string} [options.http] - pass an specific axios instance.
+     * @param {string} [options.idAttribute] - override the default id url key.
+     * @param {string} [options.url] - override the url.
+     */
     constructor(options = {}) {
-        this.idAttribute = options.idAttribute || 'id';
-        this._url = options.url || this.constructor.URL || '';
+        const statics = this.constructor;
+        this.idAttribute = options.idAttribute || statics.ID_ATTRIBUTE || 'id';
         this.http = options.http || axios;
+        this._url = options.url || statics.URL || '';
     }
 
     /**
@@ -21,17 +25,17 @@ export default class Resource {
     }
 
     /**
-     *
-     * @param {string} id
+     * Applies the id automatically within the keys.
+     * @param {string} [id]
      * @param {Object} [options]
      * @returns {{keys: {}}}
      */
-    getUrlKeys(id, options) {
-        return objectAssign({
-            keys: {
-                [this.idAttribute]: id,
-            },
-        }, options);
+    applyUrlKeys(id, options) {
+        if (!id) return options;
+        const keys = (options || {}).keys;
+        return objectAssign({}, options, {
+            keys: objectAssign({ [this.idAttribute]: id }, keys),
+        });
     }
 
     /**
@@ -40,7 +44,7 @@ export default class Resource {
      * @returns {*}
      */
     fetch(id, options) {
-        return this.sync('get', null, this.getUrlKeys(id, options));
+        return this.sync('get', null, this.applyUrlKeys(id, options));
     }
 
     /**
@@ -59,16 +63,16 @@ export default class Resource {
      * @returns {PromiseLike<T>|Promise<T>|*}
      */
     patch(id, attrs, options) {
-        return this.sync('patch', attrs, this.getUrlKeys(id, options));
+        return this.sync('patch', attrs, this.applyUrlKeys(id, options));
     }
 
     /**
      * @param {string} id
      * @param {Object} [options]
-     * @returns {*}
+     * @returns {PromiseLike<T>|Promise<T>|*}
      */
     delete(id, options) {
-        return this.sync('delete', null, this.getUrlKeys(id, options));
+        return this.sync('delete', null, this.applyUrlKeys(id, options));
     }
 
     /**
@@ -85,7 +89,7 @@ export default class Resource {
      * @param {string} method
      * @param {Object|null} [data]
      * @param {Object} [options]
-     * @returns {PromiseLike<T> | Promise<T> | *}
+     * @returns {PromiseLike<T>|Promise<T>|*}
      */
     sync(method, data, options = {}) {
         return this.http(objectAssign({

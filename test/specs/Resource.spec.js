@@ -27,6 +27,14 @@ describe('Axios resource', () => {
         expect(resource.url()).toEqual('test/');
     });
 
+    it('applies the URL keys', () => {
+        const resource = new StubResource({ url: 'test/{id}' });
+        expect(resource.url((resource.applyUrlKeys('123') || {}).keys))
+            .toEqual('test/123');
+        expect(resource.url((resource.applyUrlKeys() || {}).keys))
+            .toEqual('test/');
+    });
+
     it('parses the response', () => {
         const resource = new StubResource({
             url: 'test/',
