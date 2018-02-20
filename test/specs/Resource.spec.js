@@ -48,4 +48,19 @@ describe('Axios resource', () => {
                 expect(response.data).toEqual(data);
             });
     });
+
+    it('inherits static properties from parents', () => {
+        class Parent extends Resource {
+            static URL = 'parent';
+        }
+
+        class Child extends Parent {
+        }
+
+        expect(Child.URL).toBe(Parent.URL);
+
+        const child = new Child();
+        // eslint-disable-next-line no-underscore-dangle
+        expect(child._url).toBe(Parent.URL);
+    });
 });
