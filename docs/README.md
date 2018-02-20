@@ -1,16 +1,6 @@
-# axios-resource
-
-[![Build Status](https://travis-ci.org/emileber/axios-resource.svg?branch=master)](https://travis-ci.org/emileber/axios-resource)
-[![Dependency Status](https://beta.gemnasium.com/badges/github.com/emileber/axios-resource.svg)](https://beta.gemnasium.com/projects/github.com/emileber/axios-resource)
-[![npm version](https://badge.fury.io/js/axios-resource.svg)](https://www.npmjs.com/package/axios-resource)
+# Axios REST Resource
 
 Simple [axios](https://github.com/axios/axios) resource class to easily interact with a REST endpoint.
-
-Explore [**the documentation**](https://emileber.github.io/axios-resource/).
-
-## Requirements
-
-- axios
 
 ## Installation
 

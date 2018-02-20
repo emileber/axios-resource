@@ -4,12 +4,12 @@ const replace = require('rollup-plugin-replace');
 const pkg = require('../package.json');
 
 const version = process.env.VERSION || pkg.version;
-const name = 'axios-resource';
+const name = pkg.name;
 const banner =
     `/**
  * ${name} v${version}
- * (c) ${new Date().getFullYear()} Émile Bergeron
- * @license MIT
+ * (c) ${new Date().getFullYear()} ${pkg.author}
+ * @license ${pkg.license}
  */`;
 
 const resolve = _path => path.resolve(__dirname, '../', _path);
@@ -37,6 +37,7 @@ function genConfig(opts) {
                 }),
                 buble(),
             ],
+            external: ['axios', 'object-assign', 'pupa'],
         },
         output: {
             banner,
