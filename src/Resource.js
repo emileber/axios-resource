@@ -1,6 +1,6 @@
-import template from 'pupa';
 import axios from 'axios';
 import objectAssign from 'object-assign';
+
 
 export default class Resource {
     /**

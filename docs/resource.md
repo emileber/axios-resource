@@ -84,7 +84,7 @@ All HTTP alias methods pass through here. Default axios request options are set 
 
 ### `url(keys)`
 
-Builds the final URL to send to axios for the request. It uses [_pupa_](https://github.com/sindresorhus/pupa) simple templating function to replace the URL parameters.
+Builds the final URL to send to axios for the request. It uses [_pope_](https://github.com/poppinss/pope) simple templating function to replace the URL parameters.
 
 ?> Override the `url` method to easily use another templating function.
 
