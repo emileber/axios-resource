@@ -37,7 +37,7 @@ function genConfig(opts) {
                 }),
                 buble(),
             ],
-            external: ['axios', 'object-assign', 'pupa'],
+            external: ['axios', 'object-assign'],
         },
         output: {
             banner,

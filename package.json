@@ -64,7 +64,6 @@
         "uglify-js": "^3.3.11"
     },
     "dependencies": {
-        "object-assign": "^4.1.1",
-        "pupa": "^1.0.0"
+        "object-assign": "^4.1.1"
     }
 }
