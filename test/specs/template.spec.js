@@ -62,4 +62,9 @@ describe('Template function', () => {
     it('replaces a value of zero', () => {
         expect(t('Zero value {{index}}', { index: 0 })).toBe('Zero value 0');
     });
+
+    it('parses a template with a custom regex', () => {
+        expect(t('Hello {name}', { name: 'virk' }, { regex: /{(.*?)}/g }))
+            .toBe('Hello virk');
+    });
 });

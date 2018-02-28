@@ -1,6 +1,6 @@
 import axios from 'axios';
 import objectAssign from 'object-assign';
-
+import template from './template';
 
 export default class Resource {
     /**
@@ -21,7 +21,7 @@ export default class Resource {
      * @returns {string}
      */
     url(keys) {
-        return template(this._url, keys || {});
+        return template(this._url, keys || {}, { regex: /{(.*?)}/g });
     }
 
     /**
